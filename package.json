@@ -1,0 +1,15 @@
+{
+  "name": "fit-styling-service",
+  "version": "0.1.0",
+  "description": "Styling Service for the Fit app — scores and ranks outfit combinations from the Catalog Service based on body type, occasion, season, and budget.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "node-fetch": "^3.3.2"
+  }
+}
