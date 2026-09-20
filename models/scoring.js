@@ -1,4 +1,4 @@
-const NAME_KEYWORDS = {
+ξconst NAME_KEYWORDS = {
   structured: ["blazer", "tailored", "wrap"],
   wide_leg: ["wide-leg", "wide leg"],
   fitted: ["slim", "skinny", "fitted"],
@@ -87,6 +87,9 @@ function scoreOutfit(bodyType, items) {
     items.reduce((sum, it) => sum + (it.image_readiness === "high" ? 1 : it.image_readiness === "medium" ? 0.5 : 0), 0) /
     items.length;
   total += avgReadiness;
+    const imageBonus = items.reduce((sum, it) => sum + (it.image_url ? 1 : 0), 0) / items.length;
+  total += imageBonus * 3;
+
 
   return { score: total, reasons: reasons.slice(0, 2) };
 }
