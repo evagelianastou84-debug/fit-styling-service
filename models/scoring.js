@@ -1,4 +1,4 @@
-ξconst NAME_KEYWORDS = {
+const NAME_KEYWORDS = {
   structured: ["blazer", "tailored", "wrap"],
   wide_leg: ["wide-leg", "wide leg"],
   fitted: ["slim", "skinny", "fitted"],
