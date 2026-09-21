@@ -88,7 +88,7 @@ function scoreOutfit(bodyType, items) {
     items.length;
   total += avgReadiness;
     const imageBonus = items.reduce((sum, it) => sum + (it.image_url ? 1 : 0), 0) / items.length;
-  total += imageBonus * 3;
+  total += imageBonus * 10;
 
 
   return { score: total, reasons: reasons.slice(0, 2) };
