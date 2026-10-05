@@ -18,6 +18,15 @@ router.post("/recommend-outfits", async (req, res) => {
   if (season) params.set("season", String(season).toLowerCase());
 
   let products;
+let trendColors = [];
+try {
+  const trendsRes = await fetch(`${CATALOG_URL}/trends`);
+  if (trendsRes.ok) {
+    const trendsData = await trendsRes.json();
+    trendColors = (trendsData.trend_colors || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+} catch (e) {}
+
   try {
     const catalogRes = await fetch(`${CATALOG_URL}/products?${params.toString()}`);
     if (!catalogRes.ok) throw new Error(`Catalog Service returned ${catalogRes.status}`);
@@ -35,7 +44,8 @@ router.post("/recommend-outfits", async (req, res) => {
 
   const scored = candidates
     .map((c) => {
-      const { score, reasons } = scoreOutfit(body_type, c.items);
+      const { score, reasons } = scoreOutfit(body_type, c.items, trendColors);
+
       return { ...c, score, reasons };
     })
     .sort((a, b) => b.score - a.score);
