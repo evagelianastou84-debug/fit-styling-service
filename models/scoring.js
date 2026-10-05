@@ -73,7 +73,9 @@ function scoreItemForBodyType(bodyType, item) {
   return { score, reason };
 }
 
-function scoreOutfit(bodyType, items) {
+function scoreOutfit(bodyType, items, trendColors) {
+  trendColors = trendColors || [];
+
   let total = 0;
   const reasons = [];
 
@@ -87,6 +89,14 @@ function scoreOutfit(bodyType, items) {
     items.reduce((sum, it) => sum + (it.image_readiness === "high" ? 1 : it.image_readiness === "medium" ? 0.5 : 0), 0) /
     items.length;
   total += avgReadiness;
+    const trendyCount = items.filter(function (it) {
+    return it.color && trendColors.some(function (c) { return it.color.toLowerCase().includes(c); });
+  }).length;
+  if (trendyCount > 0) {
+    total += trendyCount * 1.5;
+    if (!reasons.includes("in this season's color palette")) reasons.push("in this season's color palette");
+  }
+
     const imageBonus = items.reduce((sum, it) => sum + (it.image_url ? 1 : 0), 0) / items.length;
   total += imageBonus * 10;
 
