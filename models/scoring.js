@@ -101,7 +101,8 @@ function scoreOutfit(bodyType, items, trendColors) {
   total += imageBonus * 10;
 
 
-  return { score: total, reasons: reasons.slice(0, 2) };
+  return { score: total, reasons: reasons.slice(0, 3) };
+
 }
 
 export { scoreOutfit, scoreItemForBodyType };
